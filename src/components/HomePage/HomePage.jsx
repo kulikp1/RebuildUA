@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const [userType, setUserType] = useState("citizen");
+  const [isLogin, setIsLogin] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isLogin) {
+      navigate(userType === "citizen" ? "/login-user" : "/login-company");
+    } else {
+      navigate(userType === "citizen" ? "/register-user" : "/register-company");
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
@@ -14,32 +28,71 @@ const HomePage = () => {
       </header>
 
       <main className={styles.mainContent}>
-        <div className={styles.textContent}>
-          <h1 className={styles.title}>Допомагаємо відновлювати життя</h1>
+        <section className={styles.leftContent}>
+          <h1 className={styles.title}>Відбудова України починається з тебе</h1>
           <p className={styles.subtitle}>
-            Сервіс координації зусиль для громадян, компаній та держави у
-            ліквідації наслідків руйнувань. Заявки. Звіти. Відновлення.
+            Ми об'єднуємо громадян, компанії та державу для ефективної
+            координації відновлення зруйнованої інфраструктури.
           </p>
-          <button className={styles.ctaButton}>Подати заявку</button>
-        </div>
-        <div className={styles.sliderPreview}>
-          <div className={styles.slide}>
-            <span className={styles.slideNumber}>01</span>
-            <h3>Подайте заявку з геолокацією</h3>
+        </section>
+
+        <section className={styles.rightContent}>
+          <div className={styles.formCard}>
+            <div className={styles.roleSwitcher}>
+              <button
+                className={`${styles.switchButton} ${
+                  userType === "citizen" ? styles.active : ""
+                }`}
+                onClick={() => setUserType("citizen")}
+              >
+                Громадянин
+              </button>
+              <button
+                className={`${styles.switchButton} ${
+                  userType === "company" ? styles.active : ""
+                }`}
+                onClick={() => setUserType("company")}
+              >
+                Компанія
+              </button>
+            </div>
+
+            <h2 className={styles.formTitle}>
+              {isLogin ? "Увійти" : "Зареєструватися"} як{" "}
+              {userType === "citizen" ? "Громадянин" : "Компанія"}
+            </h2>
+
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <input type="text" placeholder="Логін" required />
+              <input type="password" placeholder="Пароль" required />
+              {!isLogin && (
+                <input
+                  type="password"
+                  placeholder="Повторіть пароль"
+                  required
+                />
+              )}
+
+              <button type="submit" className={styles.submitButton}>
+                {isLogin ? "Увійти" : "Зареєструватися"}
+              </button>
+            </form>
+
+            <p className={styles.toggleText}>
+              {isLogin ? "Не маєш акаунту?" : "Є акаунт?"}
+              <span
+                className={styles.toggleLink}
+                onClick={() => setIsLogin(!isLogin)}
+              >
+                {isLogin ? " Зареєструватися" : " Увійти"}
+              </span>
+            </p>
           </div>
-          <div className={styles.slide}>
-            <span className={styles.slideNumber}>02</span>
-            <h3>Компанії отримують завдання</h3>
-          </div>
-          <div className={styles.slide}>
-            <span className={styles.slideNumber}>03</span>
-            <h3>Ви отримуєте результат і звіт</h3>
-          </div>
-        </div>
+        </section>
       </main>
 
       <footer className={styles.footer}>
-        <p>&copy; 2025 Rebuild. Всі права захищено.</p>
+        <p>&copy; 2025 Rebuild — Платформа відновлення України</p>
       </footer>
     </div>
   );
