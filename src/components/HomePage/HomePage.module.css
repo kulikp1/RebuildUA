@@ -133,10 +133,17 @@ input {
   color: #fff;
   font-size: 15px;
   font-family: var(--secondary-font);
+  transition: border 0.7s ease;
 }
 
 input::placeholder {
   color: #888;
+}
+
+input:focus {
+  border: 1px solid #fffdfd;
+
+  outline: none;
 }
 
 .submitButton {
