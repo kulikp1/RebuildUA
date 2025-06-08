@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -6,9 +7,9 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.logo}>REBUILD</div>
       <nav className={styles.nav}>
-        <a href="#">Головна</a>
-        <a href="#">Про нас</a>
-        <a href="#">Контакти</a>
+        <Link to="/">Головна</Link>
+        <Link to="/requests">Всі заявки</Link>
+        <Link to="/contacts">Контакти</Link>
       </nav>
     </header>
   );
