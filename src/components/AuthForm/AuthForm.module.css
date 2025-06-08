@@ -125,3 +125,42 @@ input:focus {
   line-height: 1.2;
   margin: 2px 0;
 }
+
+/* Перебиваємо стилі react-toastify */
+
+.Toastify__toast-container {
+  width: 400px !important;
+  max-width: 90vw !important;
+  font-family: var(--secondary-font) !important;
+  z-index: 9999 !important;
+}
+
+.Toastify__toast {
+  background: rgba(111, 111, 111, 0.3) !important; /* прозорий темний фон */
+  color: #fff !important; /* світлий текст */
+  border-radius: 20px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+  font-size: 16px !important;
+  padding: 16px 24px !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid #555 !important;
+  transition: background 0.5s ease, color 0.5s ease !important;
+}
+
+.Toastify__toast--error {
+  border-color: #ff4d4f !important;
+}
+
+.Toastify__progress-bar {
+  background: #000 !important;
+}
+
+.Toastify__close-button {
+  color: #fff !important;
+  opacity: 0.7 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1 !important;
+}

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AuthForm.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./toastifyOverrides.css";
 
 const AuthForm = () => {
   const navigate = useNavigate();
   const [userType, setUserType] = useState("citizen");
   const [isLogin, setIsLogin] = useState(false);
-  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     login: "",
     password: "",
@@ -25,14 +27,24 @@ const AuthForm = () => {
 
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
-      if (!formData.login || !isEmail(formData.login)) return;
+      const login = formData.login;
+
+      if (!login || !isEmail(login)) {
+        setValidation((prev) => ({ ...prev, emailTaken: false }));
+        return;
+      }
 
       try {
         const res = await fetch(
-          `https://6844cf88fc51878754d9e305.mockapi.io/users?login=${formData.login}`
+          "https://6844cf88fc51878754d9e305.mockapi.io/users"
         );
         const users = await res.json();
-        setValidation((prev) => ({ ...prev, emailTaken: users.length > 0 }));
+
+        const emailTaken = users.some(
+          (user) => user.login.toLowerCase() === login.toLowerCase()
+        );
+
+        setValidation((prev) => ({ ...prev, emailTaken }));
       } catch (err) {
         console.error("Помилка при перевірці email", err);
       }
@@ -56,15 +68,23 @@ const AuthForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
-    if (!validation.emailValid) return setError("Невірний формат email");
-    if (!validation.passwordValid)
-      return setError("Пароль повинен містити щонайменше 5 символів");
-    if (!isLogin && !validation.passwordsMatch)
-      return setError("Паролі не збігаються");
-    if (!isLogin && validation.emailTaken)
-      return setError("Такий email вже зареєстрований");
+    if (!validation.emailValid) {
+      toast.error("Невірний формат email");
+      return;
+    }
+    if (!validation.passwordValid) {
+      toast.error("Пароль повинен містити щонайменше 5 символів");
+      return;
+    }
+    if (!isLogin && !validation.passwordsMatch) {
+      toast.error("Паролі не збігаються");
+      return;
+    }
+    if (!isLogin && validation.emailTaken) {
+      toast.error("Такий email вже зареєстрований");
+      return;
+    }
 
     if (isLogin) {
       navigate(userType === "citizen" ? "/login-user" : "/login-company");
@@ -90,13 +110,14 @@ const AuthForm = () => {
         navigate(userType === "citizen" ? "/userPage" : "/companyPage");
       } catch (err) {
         console.error(err);
-        setError("Помилка при реєстрації. Спробуйте пізніше.");
+        toast.error("Помилка при реєстрації. Спробуйте пізніше.");
       }
     }
   };
 
   return (
     <div className={styles.formCard}>
+      <ToastContainer />
       <div className={styles.roleSwitcher}>
         <button
           className={`${styles.switchButton} ${
@@ -167,8 +188,6 @@ const AuthForm = () => {
           </>
         )}
 
-        {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-
         <button type="submit" className={styles.submitButton}>
           {isLogin ? "Увійти" : "Зареєструватися"}
         </button>
@@ -180,7 +199,6 @@ const AuthForm = () => {
           className={styles.toggleLink}
           onClick={() => {
             setIsLogin(!isLogin);
-            setError("");
             setFormData({ login: "", password: "", repeatPassword: "" });
             setValidation({
               emailValid: false,
