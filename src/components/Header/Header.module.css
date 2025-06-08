@@ -1,14 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap");
+
+:root {
+  --primary-font: "Montserrat", sans-serif;
+  --secondary-font: "Roboto", sans-serif;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 60px;
   background: #000;
+  font-family: var(--primary-font);
 }
 
 .logo {
   font-size: 24px;
   font-weight: bold;
+  color: #fff;
 }
 
 .nav a {
