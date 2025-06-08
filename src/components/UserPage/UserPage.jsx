@@ -17,7 +17,6 @@ const UserPage = () => {
 
   useEffect(() => {
     const email = localStorage.getItem("userEmail");
-
     if (email) {
       const name = email.split("@")[0];
       setUserEmail(name.charAt(0).toUpperCase() + name.slice(1));
@@ -27,6 +26,12 @@ const UserPage = () => {
       setRawEmail("unknown@example.com");
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userEmail");
+    toast.info("Ви вийшли з акаунту.");
+    window.location.href = "/"; // або "/"
+  };
 
   const uploadToCloudinary = async (file) => {
     const data = new FormData();
@@ -163,6 +168,14 @@ const UserPage = () => {
             disabled={uploading || submitting}
           >
             {submitting ? "⏳ Надсилання..." : "Надіслати заявку"}
+          </button>
+
+          <button
+            type="button"
+            className={styles.logoutButton}
+            onClick={handleLogout}
+          >
+            Вийти з акаунту
           </button>
         </form>
       </div>
