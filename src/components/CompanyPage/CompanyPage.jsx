@@ -1,16 +1,42 @@
 import React from "react";
 import styles from "./CompanyPage.module.css";
 import Header from "../Header/Header";
+import { FaFolderOpen, FaCamera, FaFileUpload } from "react-icons/fa";
 
 const CompanyPage = () => {
   return (
     <>
       <Header />
-      <div className={styles.container}>
-        <h1 className={styles.title}>Ласкаво просимо, Компаніє!</h1>
-        <p className={styles.subtitle}>
-          Це ваша компанійська панель платформи REBUILD.
-        </p>
+      <div className={styles.wrapper}>
+        <div className={styles.inner}>
+          <h1 className={styles.title}>Панель компанії</h1>
+          <p className={styles.subtitle}>
+            Виберіть одну з дій для роботи із заявками платформи REBUILD.
+          </p>
+
+          <div className={styles.actions}>
+            <div className={styles.card}>
+              <FaFolderOpen className={styles.icon} />
+              <h3>Переглянути заявки</h3>
+              <p>Актуальні заявки на відновлення. Фільтруйте, приймайте.</p>
+              <button>Відкрити</button>
+            </div>
+
+            <div className={styles.card}>
+              <FaCamera className={styles.icon} />
+              <h3>Фото до / після</h3>
+              <p>Додавайте фото до виконання та після завершення робіт.</p>
+              <button>Завантажити</button>
+            </div>
+
+            <div className={styles.card}>
+              <FaFileUpload className={styles.icon} />
+              <h3>Завантажити звіти</h3>
+              <p>Прикріпіть фінальні звіти для подальшої верифікації.</p>
+              <button>Додати звіт</button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

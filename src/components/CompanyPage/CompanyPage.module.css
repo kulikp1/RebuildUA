@@ -1,16 +1,108 @@
-.container {
-  padding: 60px;
-  text-align: center;
-  background: #e6f0f2;
+.wrapper {
+  background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.85)
+    ),
+    url("/src/assets/background.jpg") no-repeat center center / cover;
+  color: #fff;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--primary-font);
+  overflow-x: hidden; /* ← додано */
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
 .title {
-  font-size: 32px;
-  color: #222;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 .subtitle {
-  font-size: 18px;
-  color: #444;
+  font-size: 1.25rem;
+  color: #ccc;
+  margin-bottom: 3rem;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ТРИ в ряд */
+  gap: 2rem;
+  align-items: stretch;
+  justify-items: center;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 240px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.icon {
+  font-size: 2.5rem;
+  color: #4ade80;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.card p {
+  color: #ddd;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.card button {
+  background-color: #4ade80;
+  color: #000;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.card button:hover {
+  background-color: #22c55e;
+}
+
+@media (max-width: 960px) {
+  .actions {
+    grid-template-columns: 1fr 1fr; /* 2 в ряд на планшетах */
+  }
+}
+
+@media (max-width: 640px) {
+  .actions {
+    grid-template-columns: 1fr; /* 1 в ряд на мобільних */
+  }
 }
