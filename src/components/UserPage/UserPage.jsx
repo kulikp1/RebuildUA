@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styles from "./UserPage.module.css";
 import Header from "../Header/Header";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../AuthForm/toastifyOverrides.css";
 
 const UserPage = () => {
   const [title, setTitle] = useState("");
@@ -26,10 +29,16 @@ const UserPage = () => {
         }
       );
       const result = await res.json();
+
+      if (!result.secure_url) {
+        throw new Error("Cloudinary не повернув URL.");
+      }
+
       setImageUrl(result.secure_url);
+      toast.success("Зображення успішно завантажено!");
     } catch (err) {
       console.error("Помилка завантаження:", err);
-      alert("❌ Не вдалося завантажити зображення.");
+      toast.error("Не вдалося завантажити зображення.");
     } finally {
       setUploading(false);
     }
@@ -47,7 +56,7 @@ const UserPage = () => {
     e.preventDefault();
 
     if (!imageUrl) {
-      alert("Зачекайте, поки зображення завантажиться.");
+      toast.warn("⚠️ Зачекайте, поки зображення завантажиться.");
       return;
     }
 
@@ -76,16 +85,15 @@ const UserPage = () => {
 
       const result = await res.json();
       console.log("Заявка успішно надіслана:", result);
-      alert("✅ Заявку надіслано успішно!");
+      toast.success("Заявку надіслано успішно!");
 
-      // Очистити поля
       setTitle("");
       setDescription("");
       setFile(null);
       setImageUrl("");
     } catch (err) {
       console.error("Помилка при надсиланні:", err);
-      alert("❌ Не вдалося надіслати заявку.");
+      toast.error("Не вдалося надіслати заявку.");
     } finally {
       setSubmitting(false);
     }
@@ -149,6 +157,7 @@ const UserPage = () => {
           </button>
         </form>
       </div>
+      <ToastContainer position="top-right" autoClose={4000} />
     </>
   );
 };
