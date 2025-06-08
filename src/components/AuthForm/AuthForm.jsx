@@ -87,7 +87,7 @@ const AuthForm = () => {
     }
 
     if (isLogin) {
-      navigate(userType === "citizen" ? "/login-user" : "/login-company");
+      navigate(userType === "citizen" ? "/userPage" : "/companyPage");
     } else {
       try {
         const payload = {
