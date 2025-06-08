@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./UserPage.module.css";
 import Header from "../Header/Header";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,12 +6,27 @@ import "react-toastify/dist/ReactToastify.css";
 import "../AuthForm/toastifyOverrides.css";
 
 const UserPage = () => {
+  const [userEmail, setUserEmail] = useState("Громадянине");
+  const [rawEmail, setRawEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+
+    if (email) {
+      const name = email.split("@")[0];
+      setUserEmail(name.charAt(0).toUpperCase() + name.slice(1));
+      setRawEmail(email);
+    } else {
+      setUserEmail("Громадянине");
+      setRawEmail("unknown@example.com");
+    }
+  }, []);
 
   const uploadToCloudinary = async (file) => {
     const data = new FormData();
@@ -30,9 +45,7 @@ const UserPage = () => {
       );
       const result = await res.json();
 
-      if (!result.secure_url) {
-        throw new Error("Cloudinary не повернув URL.");
-      }
+      if (!result.secure_url) throw new Error("Cloudinary не повернув URL.");
 
       setImageUrl(result.secure_url);
       toast.success("Зображення успішно завантажено!");
@@ -64,6 +77,7 @@ const UserPage = () => {
       title,
       description,
       imageUrl,
+      email: rawEmail || "unknown@example.com",
     };
 
     try {
@@ -79,14 +93,9 @@ const UserPage = () => {
         }
       );
 
-      if (!res.ok) {
-        throw new Error("Помилка надсилання заявки.");
-      }
+      if (!res.ok) throw new Error("Помилка надсилання заявки.");
 
-      const result = await res.json();
-      console.log("Заявка успішно надіслана:", result);
       toast.success("Заявку надіслано успішно!");
-
       setTitle("");
       setDescription("");
       setFile(null);
@@ -103,7 +112,7 @@ const UserPage = () => {
     <>
       <Header />
       <div className={styles.container}>
-        <h1 className={styles.title}>Ласкаво просимо, Громадянине!</h1>
+        <h1 className={styles.title}>Ласкаво просимо, {userEmail}!</h1>
         <p className={styles.subtitle}>
           Це ваша особиста сторінка на платформі REBUILD.
         </p>

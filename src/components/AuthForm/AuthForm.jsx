@@ -87,7 +87,42 @@ const AuthForm = () => {
     }
 
     if (isLogin) {
-      navigate(userType === "citizen" ? "/userPage" : "/companyPage");
+      try {
+        const res = await fetch(
+          "https://6844cf88fc51878754d9e305.mockapi.io/users"
+        );
+        const users = await res.json();
+
+        const user = users.find(
+          (u) =>
+            u.login.toLowerCase() === formData.login.toLowerCase() &&
+            u.password === formData.password
+        );
+
+        if (!user) {
+          toast.error("Невірний email або пароль");
+          return;
+        }
+
+        const expectedRole = userType === "citizen" ? "user" : "company";
+
+        if (user.role !== expectedRole) {
+          toast.error(
+            "Цей обліковий запис належить " +
+              (user.role === "user" ? "клієнту" : "компанії")
+          );
+          return;
+        }
+
+        // Зберігаємо email у localStorage
+        localStorage.setItem("userEmail", user.login);
+
+        // Навігація
+        navigate(userType === "citizen" ? "/userPage" : "/companyPage");
+      } catch (err) {
+        console.error(err);
+        toast.error("Помилка при вході. Спробуйте пізніше.");
+      }
     } else {
       try {
         const payload = {
@@ -106,6 +141,9 @@ const AuthForm = () => {
         );
 
         if (!response.ok) throw new Error("Registration failed");
+
+        // Зберігаємо email у localStorage
+        localStorage.setItem("userEmail", formData.login);
 
         navigate(userType === "citizen" ? "/userPage" : "/companyPage");
       } catch (err) {
