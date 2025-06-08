@@ -1,0 +1,16 @@
+.container {
+  padding: 60px;
+  text-align: center;
+  background: #e6f0f2;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 32px;
+  color: #222;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #444;
+}

@@ -185,3 +185,19 @@ input:focus {
   color: #888;
   font-family: var(--secondary-font);
 }
+
+.validationBox {
+  min-height: 48px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  margin: 2px 0;
+}
