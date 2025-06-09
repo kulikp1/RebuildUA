@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import styles from "./RequestsPage.module.css";
+import RequestModal from "../RequestModal/RequestModal";
 
 const RequestsPage = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRequest, setSelectedRequest] = useState(null);
 
   useEffect(() => {
     fetch("https://6844cf88fc51878754d9e305.mockapi.io/bid")
@@ -29,23 +31,36 @@ const RequestsPage = () => {
           <p className={styles.loading}>Завантаження...</p>
         ) : (
           <div className={styles.grid}>
-            {requests.map(({ id, title, imageUrl, email }) => (
-              <div key={id} className={styles.card}>
-                <img src={imageUrl} alt={title} className={styles.image} />
+            {requests.map((req) => (
+              <div key={req.id} className={styles.card}>
+                <img
+                  src={req.imageUrl}
+                  alt={req.title}
+                  className={styles.image}
+                />
                 <div className={styles.content}>
-                  <p className={styles.label}>Назва:</p>
-                  <h2 className={styles.cardTitle}>{title}</h2>
+                  <p className={styles.label}>Проблема:</p>
+                  <h2 className={styles.cardTitle}>{req.title}</h2>
 
-                  <p className={styles.label}>Email:</p>
-                  <p className={styles.email}>{email}</p>
+                  <p className={styles.label}>Контакти:</p>
+                  <p className={styles.email}>{req.email}</p>
 
-                  <button className={styles.detailsButton}>Детальніше</button>
+                  <button
+                    className={styles.detailsButton}
+                    onClick={() => setSelectedRequest(req)}
+                  >
+                    Детальніше
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         )}
       </main>
+      <RequestModal
+        request={selectedRequest}
+        onClose={() => setSelectedRequest(null)}
+      />
     </div>
   );
 };
