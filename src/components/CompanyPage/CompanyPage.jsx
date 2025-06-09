@@ -2,8 +2,15 @@ import React from "react";
 import styles from "./CompanyPage.module.css";
 import Header from "../Header/Header";
 import { FaFolderOpen, FaCamera, FaFileUpload } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // імпортуємо хук
 
 const CompanyPage = () => {
+  const navigate = useNavigate(); // ініціалізуємо навігатор
+
+  const handleOpenRequests = () => {
+    navigate("/requests"); // переходимо на сторінку заявок
+  };
+
   return (
     <>
       <Header />
@@ -19,7 +26,7 @@ const CompanyPage = () => {
               <FaFolderOpen className={styles.icon} />
               <h3>Переглянути заявки</h3>
               <p>Актуальні заявки на відновлення. Фільтруйте, приймайте.</p>
-              <button>Відкрити</button>
+              <button onClick={handleOpenRequests}>Відкрити</button>
             </div>
 
             <div className={styles.card}>

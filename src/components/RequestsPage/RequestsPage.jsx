@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-escape */
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import styles from "./RequestsPage.module.css";
 import RequestModal from "../RequestModal/RequestModal";
@@ -11,6 +12,7 @@ const RequestsPage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
+  const navigate = useNavigate();
 
   // Функція для отримання заявок
   const fetchRequests = () => {
@@ -34,10 +36,13 @@ const RequestsPage = () => {
   // Витягуємо тільки міста з location
   const extractCity = (location) => {
     if (!location) return "Невідомо";
-    const match = location.match(/м\. ?[А-Яа-яІіЇїЄєҐґ\-]+/);
-    return match ? match[0].trim() : "Невідомо";
+    const match = location.match(/м\. ?([А-Яа-яІіЇїЄєҐґ\-]+)/i);
+    return match
+      ? `м. ${match[1][0].toUpperCase()}${match[1].slice(1).toLowerCase()}`
+      : "Невідомо";
   };
 
+  // Отримуємо всі унікальні міста, з однаковим форматом (м. Київ, м. Львів, тощо)
   const cities = Array.from(
     new Set(
       requests
@@ -46,15 +51,16 @@ const RequestsPage = () => {
     )
   );
 
+  // Фільтрація без залежності від регістру
   const filteredRequests = selectedCity
-    ? requests.filter((req) => extractCity(req.location) === selectedCity)
+    ? requests.filter(
+        (req) =>
+          extractCity(req.location).toLowerCase() === selectedCity.toLowerCase()
+      )
     : requests;
-
   return (
     <div className={styles.wrapper}>
       <Header />
-
-      {/* ToastContainer завжди в DOM */}
       <ToastContainer position="top-right" autoClose={3000} />
 
       <main className={styles.mainContent}>
@@ -78,6 +84,10 @@ const RequestsPage = () => {
                 </option>
               ))}
             </select>
+
+            <button onClick={() => navigate(-1)} className={styles.backButton}>
+              Повернутися
+            </button>
           </div>
         )}
 
@@ -140,7 +150,7 @@ const RequestsPage = () => {
       <RequestModal
         request={selectedRequest}
         onClose={() => setSelectedRequest(null)}
-        onStatusChange={fetchRequests} // передаємо функцію для оновлення списку
+        onStatusChange={fetchRequests}
       />
     </div>
   );

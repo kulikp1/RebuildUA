@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../AuthForm/toastifyOverrides.css";
-import { useNavigate } from "react-router-dom"; // Додано
+import { useNavigate } from "react-router-dom";
 
 const UserPage = () => {
   const [userEmail, setUserEmail] = useState("Громадянине");
@@ -17,7 +17,7 @@ const UserPage = () => {
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const navigate = useNavigate(); // Додано
+  const navigate = useNavigate();
 
   useEffect(() => {
     const email = localStorage.getItem("userEmail");
@@ -30,12 +30,6 @@ const UserPage = () => {
       setRawEmail("unknown@example.com");
     }
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("userEmail");
-    toast.info("Ви вийшли з акаунту.");
-    window.location.href = "/";
-  };
 
   const uploadToCloudinary = async (file) => {
     const data = new FormData();
@@ -120,7 +114,7 @@ const UserPage = () => {
   };
 
   const handleMyBidsClick = () => {
-    navigate("/my-bids"); // Додано
+    navigate("/my-bids");
   };
 
   return (
@@ -178,29 +172,23 @@ const UserPage = () => {
             <img src={imageUrl} alt="preview" className={styles.imagePreview} />
           )}
 
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={uploading || submitting}
-          >
-            {submitting ? "⏳ Надсилання..." : "Надіслати заявку"}
-          </button>
+          <div className={styles.buttonGroup}>
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={uploading || submitting}
+            >
+              {submitting ? "⏳ Надсилання..." : "Надіслати заявку"}
+            </button>
 
-          <button
-            type="button"
-            className={styles.myBidsButton}
-            onClick={handleMyBidsClick}
-          >
-            Мої заявки
-          </button>
-
-          <button
-            type="button"
-            className={styles.logoutButton}
-            onClick={handleLogout}
-          >
-            Вийти з акаунту
-          </button>
+            <button
+              type="button"
+              className={styles.myBidsButton}
+              onClick={handleMyBidsClick}
+            >
+              Мої заявки
+            </button>
+          </div>
         </form>
       </div>
       <ToastContainer position="top-right" autoClose={4000} />

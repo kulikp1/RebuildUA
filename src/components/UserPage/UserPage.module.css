@@ -23,13 +23,6 @@
   margin-top: 1rem;
 }
 
-.subtitle {
-  font-size: 1.25rem;
-  color: #ccc;
-  margin-bottom: 4rem;
-  text-align: center;
-}
-
 .form {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -111,36 +104,49 @@
 
 .fileLabel:hover {
   border: 2px dashed #ffffff;
+}
 
-  /* background-color: #4ade80; */
-  /* color: #000; */
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.submitButton,
+.myBidsButton {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .submitButton {
   background-color: #4ade80;
   color: #000;
-  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
 }
 
 .submitButton:hover {
   background-color: #22c55e;
 }
 
-@media (max-width: 640px) {
-  .form {
-    padding: 1.5rem;
-  }
+.myBidsButton {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
 
-  .formTitle {
-    font-size: 1.5rem;
-  }
+.myBidsButton:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+  transform: scale(1.02);
 }
 
 .imagePreview {
@@ -159,43 +165,17 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
 }
 
-.logoutButton {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: underline;
-  padding: 0;
-  margin-top: 1rem;
-  transition: color 0.3s ease;
-}
+@media (max-width: 640px) {
+  .form {
+    padding: 1.5rem;
+  }
 
-.logoutButton:hover {
-  color: #ccc;
-}
+  .buttonGroup {
+    flex-direction: column;
+  }
 
-.myBidsButton {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  border-radius: 10px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease,
-    border-color 0.3s ease;
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-  margin-top: 10px;
-}
-
-.myBidsButton:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-color: #fff;
-  transform: scale(1.02);
+  .submitButton,
+  .myBidsButton {
+    width: 100%;
+  }
 }

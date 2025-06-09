@@ -22,14 +22,10 @@ const MyBidsPage = () => {
         );
         const allBids = response.data;
 
-        console.log("ВСІ заявки з API:", allBids);
-        console.log("Email з localStorage:", userEmail);
-
         const userBids = allBids.filter(
           (bid) => bid.email && bid.email.toLowerCase().trim() === userEmail
         );
 
-        console.log("Заявки цього користувача:", userBids);
         setBids(userBids);
       } catch (error) {
         console.error("Помилка при завантаженні заявок:", error);
@@ -54,27 +50,31 @@ const MyBidsPage = () => {
         <button onClick={handleBack} className={styles.backButton}>
           Повернутися
         </button>
-        {bids.length > 0 ? (
-          <ul className={styles.bidsList}>
-            {bids.map((bid) => (
-              <li key={bid.id} className={styles.bidItem}>
-                <p className={styles.bidField}>
-                  <span className={styles.bidLabel}>Заголовок:</span>{" "}
-                  {bid.title}
-                </p>
-                <p className={styles.bidField}>
-                  <span className={styles.bidLabel}>Опис:</span>{" "}
-                  {bid.description}
-                </p>
-                <p className={styles.bidField}>
-                  <span className={styles.bidLabel}>Статус:</span> {bid.status}
-                </p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className={styles.noBidsText}>У вас ще немає заявок.</p>
-        )}
+
+        <div className={styles.scrollArea}>
+          {bids.length > 0 ? (
+            <ul className={styles.bidsList}>
+              {bids.map((bid) => (
+                <li key={bid.id} className={styles.bidItem}>
+                  <p className={styles.bidField}>
+                    <span className={styles.bidLabel}>Заголовок:</span>{" "}
+                    {bid.title}
+                  </p>
+                  <p className={styles.bidField}>
+                    <span className={styles.bidLabel}>Опис:</span>{" "}
+                    {bid.description}
+                  </p>
+                  <p className={styles.bidField}>
+                    <span className={styles.bidLabel}>Статус:</span>{" "}
+                    {bid.status ? bid.status : "Заявку подано"}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={styles.noBidsText}>У вас ще немає заявок.</p>
+          )}
+        </div>
       </div>
     </>
   );

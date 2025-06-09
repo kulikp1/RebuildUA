@@ -211,3 +211,27 @@
   outline: none;
   box-shadow: none;
 }
+
+.backButtonWrapper {
+  margin-top: 12px;
+  margin-bottom: 24px;
+
+  text-align: left;
+}
+
+.backButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: var(--secondary-font);
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover {
+  background: #fff;
+  color: #000;
+}
