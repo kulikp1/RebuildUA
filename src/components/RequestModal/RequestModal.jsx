@@ -1,13 +1,33 @@
 import React from "react";
 import styles from "./RequestModal.module.css";
+import { MapPin, Mail, AlertCircle } from "lucide-react";
 
 const RequestModal = ({ request, onClose }) => {
   if (!request) return null;
 
-  const handleTakeRequest = () => {
-    alert(`Заявку "${request.title}" взято в роботу!`);
-    // Тут можна реалізувати POST-запит або зміну статусу заявки
-    onClose();
+  const handleTakeRequest = async () => {
+    try {
+      const response = await fetch(
+        `https://6844cf88fc51878754d9e305.mockapi.io/bid/${request.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: "в роботі" }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Не вдалося оновити статус.");
+      }
+
+      alert(`Заявку "${request.title}" взято в роботу!`);
+      onClose();
+    } catch (error) {
+      console.error("Помилка при оновленні:", error);
+      alert("Сталася помилка при оновленні статусу.");
+    }
   };
 
   return (
@@ -24,21 +44,38 @@ const RequestModal = ({ request, onClose }) => {
         />
 
         <div className={styles.content}>
-          <h2 className={styles.title}>Проблема</h2>
-          <p className={styles.text}>{request.title}</p>
+          <div className={styles.section}>
+            <h2 className={styles.title}>
+              <AlertCircle className={styles.icon} />
+              {request.title}
+            </h2>
+          </div>
 
-          <h3 className={styles.label}>Опис проблеми</h3>
-          <p className={styles.text}>
-            {request.description || "Опис відсутній."}
-          </p>
+          <div className={styles.section}>
+            <h3 className={styles.label}>Опис проблеми</h3>
+            <div className={styles.descriptionScroll}>
+              {request.description || "Опис відсутній."}
+            </div>
+          </div>
 
-          <h3 className={styles.label}>Локація</h3>
-          <p className={styles.text}>
-            {request.location || "Локація не вказана."}
-          </p>
-
-          <h3 className={styles.label}>Контакти</h3>
-          <p className={styles.text}>{request.email}</p>
+          <div className={styles.infoGrid}>
+            <div className={styles.infoBlock}>
+              <h3 className={styles.label}>
+                <Mail className={styles.icon} />
+                Контакти
+              </h3>
+              <p className={styles.text}>{request.email}</p>
+            </div>
+            <div className={styles.infoBlock}>
+              <h3 className={styles.label}>
+                <MapPin className={styles.icon} />
+                Локація
+              </h3>
+              <p className={styles.text}>
+                {request.location || "Локація не вказана."}
+              </p>
+            </div>
+          </div>
         </div>
 
         <button className={styles.actionButton} onClick={handleTakeRequest}>
