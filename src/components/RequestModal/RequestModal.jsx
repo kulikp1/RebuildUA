@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./RequestModal.module.css";
 import { MapPin, Mail, AlertCircle } from "lucide-react";
+import { toast } from "react-toastify";
 
 const RequestModal = ({ request, onClose }) => {
   if (!request) return null;
@@ -22,11 +23,11 @@ const RequestModal = ({ request, onClose }) => {
         throw new Error("Не вдалося оновити статус.");
       }
 
-      alert(`Заявку "${request.title}" взято в роботу!`);
+      toast.success(`Заявку "${request.title}" взято в роботу!`);
       onClose();
     } catch (error) {
       console.error("Помилка при оновленні:", error);
-      alert("Сталася помилка при оновленні статусу.");
+      toast.error("Сталася помилка при оновленні статусу.");
     }
   };
 

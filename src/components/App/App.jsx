@@ -4,6 +4,9 @@ import UserPage from "../UserPage/UserPage";
 import CompanyPage from "../CompanyPage/CompanyPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RequestsPage from "../RequestsPage/RequestsPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../AuthForm/toastifyOverrides.css";
 
 function App() {
   return (
@@ -15,6 +18,18 @@ function App() {
           <Route path="/companyPage" element={<CompanyPage />} />
           <Route path="/requests" element={<RequestsPage />} />
         </Routes>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
       </BrowserRouter>
     </div>
   );
