@@ -114,7 +114,6 @@ const AuthForm = () => {
           return;
         }
 
-        // Зберігаємо email у localStorage
         localStorage.setItem("userEmail", user.login);
 
         // Навігація
