@@ -116,7 +116,6 @@ const AuthForm = () => {
 
         localStorage.setItem("userEmail", user.login);
 
-        // Навігація
         navigate(userType === "citizen" ? "/userPage" : "/companyPage");
       } catch (err) {
         console.error(err);
