@@ -4,17 +4,20 @@ import Header from "../Header/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../AuthForm/toastifyOverrides.css";
+import { useNavigate } from "react-router-dom"; // Додано
 
 const UserPage = () => {
   const [userEmail, setUserEmail] = useState("Громадянине");
   const [rawEmail, setRawEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [location, setLocation] = useState(""); // Додано
+  const [location, setLocation] = useState("");
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const navigate = useNavigate(); // Додано
 
   useEffect(() => {
     const email = localStorage.getItem("userEmail");
@@ -75,14 +78,14 @@ const UserPage = () => {
     e.preventDefault();
 
     if (!imageUrl) {
-      toast.warn("⚠️ Зачекайте, поки зображення завантажиться.");
+      toast.warn("Зачекайте, поки зображення завантажиться.");
       return;
     }
 
     const formData = {
       title,
       description,
-      location, // нове поле
+      location,
       imageUrl,
       email: rawEmail || "unknown@example.com",
     };
@@ -105,7 +108,7 @@ const UserPage = () => {
       toast.success("Заявку надіслано успішно!");
       setTitle("");
       setDescription("");
-      setLocation(""); // Очистка поля
+      setLocation("");
       setFile(null);
       setImageUrl("");
     } catch (err) {
@@ -116,14 +119,15 @@ const UserPage = () => {
     }
   };
 
+  const handleMyBidsClick = () => {
+    navigate("/my-bids"); // Додано
+  };
+
   return (
     <>
       <Header />
       <div className={styles.container}>
         <h1 className={styles.title}>Ласкаво просимо, {userEmail}!</h1>
-        <p className={styles.subtitle}>
-          Це ваша особиста сторінка на платформі REBUILD.
-        </p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2 className={styles.formTitle}>Створити заявку на відбудову</h2>
@@ -180,6 +184,14 @@ const UserPage = () => {
             disabled={uploading || submitting}
           >
             {submitting ? "⏳ Надсилання..." : "Надіслати заявку"}
+          </button>
+
+          <button
+            type="button"
+            className={styles.myBidsButton}
+            onClick={handleMyBidsClick}
+          >
+            Мої заявки
           </button>
 
           <button

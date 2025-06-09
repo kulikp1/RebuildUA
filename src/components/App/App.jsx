@@ -7,6 +7,7 @@ import RequestsPage from "../RequestsPage/RequestsPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../AuthForm/toastifyOverrides.css";
+import MyBidsPage from "../MyBidsPage/MyBidsPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/userPage" element={<UserPage />} />
           <Route path="/companyPage" element={<CompanyPage />} />
           <Route path="/requests" element={<RequestsPage />} />
+          <Route path="/my-bids" element={<MyBidsPage />} />
         </Routes>
         <ToastContainer
           position="top-right"

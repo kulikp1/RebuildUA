@@ -175,3 +175,27 @@
 .logoutButton:hover {
   color: #ccc;
 }
+
+.myBidsButton {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.myBidsButton:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+  transform: scale(1.02);
+}
