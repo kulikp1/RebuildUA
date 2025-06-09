@@ -75,3 +75,27 @@
   font-size: 14px;
   color: #ccc;
 }
+
+.label {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 4px;
+  font-family: var(--secondary-font);
+  font-weight: 500;
+}
+
+.detailsButton {
+  margin-top: 16px;
+  padding: 10px 16px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: var(--secondary-font);
+}
+
+.detailsButton:hover {
+  background: #222;
+}

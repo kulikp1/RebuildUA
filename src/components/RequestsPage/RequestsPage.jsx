@@ -33,8 +33,13 @@ const RequestsPage = () => {
               <div key={id} className={styles.card}>
                 <img src={imageUrl} alt={title} className={styles.image} />
                 <div className={styles.content}>
+                  <p className={styles.label}>Назва:</p>
                   <h2 className={styles.cardTitle}>{title}</h2>
+
+                  <p className={styles.label}>Email:</p>
                   <p className={styles.email}>{email}</p>
+
+                  <button className={styles.detailsButton}>Детальніше</button>
                 </div>
               </div>
             ))}
