@@ -30,7 +30,7 @@ const UserPage = () => {
   const handleLogout = () => {
     localStorage.removeItem("userEmail");
     toast.info("Ви вийшли з акаунту.");
-    window.location.href = "/"; // або "/"
+    window.location.href = "/";
   };
 
   const uploadToCloudinary = async (file) => {
