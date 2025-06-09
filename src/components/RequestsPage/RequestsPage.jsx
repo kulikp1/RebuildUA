@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import styles from "./RequestsPage.module.css";
 import RequestModal from "../RequestModal/RequestModal";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RequestsPage = () => {
   const [requests, setRequests] = useState([]);
@@ -10,7 +12,9 @@ const RequestsPage = () => {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
 
-  useEffect(() => {
+  // Функція для отримання заявок
+  const fetchRequests = () => {
+    setLoading(true);
     fetch("https://6844cf88fc51878754d9e305.mockapi.io/bid")
       .then((res) => res.json())
       .then((data) => {
@@ -21,6 +25,10 @@ const RequestsPage = () => {
         console.error("Помилка при отриманні замовлень:", err);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchRequests();
   }, []);
 
   // Витягуємо тільки міста з location
@@ -45,6 +53,10 @@ const RequestsPage = () => {
   return (
     <div className={styles.wrapper}>
       <Header />
+
+      {/* ToastContainer завжди в DOM */}
+      <ToastContainer position="top-right" autoClose={3000} />
+
       <main className={styles.mainContent}>
         <h1 className={styles.title}>Замовлення</h1>
 
@@ -128,6 +140,7 @@ const RequestsPage = () => {
       <RequestModal
         request={selectedRequest}
         onClose={() => setSelectedRequest(null)}
+        onStatusChange={fetchRequests} // передаємо функцію для оновлення списку
       />
     </div>
   );

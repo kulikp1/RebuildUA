@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./RequestModal.module.css";
 import { MapPin, Mail, AlertCircle } from "lucide-react";
 import { toast } from "react-toastify";
+import "../AuthForm/toastifyOverrides.css";
 
-const RequestModal = ({ request, onClose }) => {
+const RequestModal = ({ request, onClose, onStatusChange }) => {
   if (!request) return null;
 
   const handleTakeRequest = async () => {
@@ -24,6 +25,11 @@ const RequestModal = ({ request, onClose }) => {
       }
 
       toast.success(`Заявку "${request.title}" взято в роботу!`);
+
+      if (typeof onStatusChange === "function") {
+        onStatusChange(); // оновити список заявок
+      }
+
       onClose();
     } catch (error) {
       console.error("Помилка при оновленні:", error);
