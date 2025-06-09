@@ -126,8 +126,6 @@ input:focus {
   margin: 2px 0;
 }
 
-/* Перебиваємо стилі react-toastify */
-
 .Toastify__toast-container {
   width: 400px !important;
   max-width: 90vw !important;
@@ -136,8 +134,8 @@ input:focus {
 }
 
 .Toastify__toast {
-  background: rgba(111, 111, 111, 0.3) !important; /* прозорий темний фон */
-  color: #fff !important; /* світлий текст */
+  background: rgba(111, 111, 111, 0.3) !important;
+  color: #fff !important;
   border-radius: 20px !important;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
   font-size: 16px !important;
