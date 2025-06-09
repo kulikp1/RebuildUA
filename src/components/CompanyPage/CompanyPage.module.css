@@ -97,12 +97,12 @@
 
 @media (max-width: 960px) {
   .actions {
-    grid-template-columns: 1fr 1fr; /* 2 в ряд на планшетах */
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 640px) {
   .actions {
-    grid-template-columns: 1fr; /* 1 в ряд на мобільних */
+    grid-template-columns: 1fr;
   }
 }
