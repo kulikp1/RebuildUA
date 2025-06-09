@@ -39,20 +39,15 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 32px;
 }
 
 .card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
 }
 
 .image {
@@ -62,18 +57,36 @@
 }
 
 .content {
-  padding: 20px;
+  padding: 24px;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.leftColumn {
+  flex: 2;
+  min-width: 200px;
+}
+
+.rightColumn {
+  flex: 1;
+  min-width: 140px;
 }
 
 .cardTitle {
   font-size: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-weight: 600;
 }
 
 .email {
   font-size: 14px;
   color: #ccc;
+  word-break: break-word;
 }
 
 .label {
@@ -84,8 +97,16 @@
   font-weight: 500;
 }
 
+.location {
+  font-size: 14px;
+  color: #ccc;
+  font-family: var(--secondary-font);
+  font-weight: 400;
+  margin-top: 8px;
+}
+
 .detailsButton {
-  margin-top: 16px;
+  margin-top: 24px;
   padding: 10px 16px;
   background: transparent;
   color: #fff;

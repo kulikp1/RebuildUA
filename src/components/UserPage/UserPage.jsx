@@ -10,6 +10,7 @@ const UserPage = () => {
   const [rawEmail, setRawEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [location, setLocation] = useState(""); // Додано
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -81,6 +82,7 @@ const UserPage = () => {
     const formData = {
       title,
       description,
+      location, // нове поле
       imageUrl,
       email: rawEmail || "unknown@example.com",
     };
@@ -103,6 +105,7 @@ const UserPage = () => {
       toast.success("Заявку надіслано успішно!");
       setTitle("");
       setDescription("");
+      setLocation(""); // Очистка поля
       setFile(null);
       setImageUrl("");
     } catch (err) {
@@ -139,6 +142,15 @@ const UserPage = () => {
             placeholder="Опис проблеми"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+
+          <input
+            type="text"
+            className={styles.input}
+            placeholder="Адреса (локація проблеми)"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
             required
           />
 

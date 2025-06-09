@@ -39,11 +39,22 @@ const RequestsPage = () => {
                   className={styles.image}
                 />
                 <div className={styles.content}>
-                  <p className={styles.label}>Проблема:</p>
-                  <h2 className={styles.cardTitle}>{req.title}</h2>
+                  <div className={styles.cardTop}>
+                    <div className={styles.leftColumn}>
+                      <p className={styles.label}>Проблема:</p>
+                      <h2 className={styles.cardTitle}>{req.title}</h2>
 
-                  <p className={styles.label}>Контакти:</p>
-                  <p className={styles.email}>{req.email}</p>
+                      <p className={styles.label}>Контакти:</p>
+                      <p className={styles.email}>{req.email}</p>
+                    </div>
+
+                    <div className={styles.rightColumn}>
+                      <p className={styles.label}>Локація:</p>
+                      <p className={styles.location}>
+                        {req.location || "Локація не вказана"}
+                      </p>
+                    </div>
+                  </div>
 
                   <button
                     className={styles.detailsButton}
