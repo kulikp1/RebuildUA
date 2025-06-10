@@ -28,10 +28,9 @@
   max-width: 500px;
   max-height: 65vh;
   overflow-y: auto;
-  padding-right: 8px; /* Для скролбару */
+  padding-right: 8px;
 }
 
-/* Стилізація скролбару */
 .scrollArea::-webkit-scrollbar {
   width: 8px;
 }
