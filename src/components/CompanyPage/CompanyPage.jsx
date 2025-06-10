@@ -2,13 +2,13 @@ import React from "react";
 import styles from "./CompanyPage.module.css";
 import Header from "../Header/Header";
 import { FaFolderOpen, FaCamera, FaFileUpload } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // імпортуємо хук
+import { useNavigate } from "react-router-dom";
 
 const CompanyPage = () => {
-  const navigate = useNavigate(); // ініціалізуємо навігатор
+  const navigate = useNavigate();
 
   const handleOpenRequests = () => {
-    navigate("/requests"); // переходимо на сторінку заявок
+    navigate("/requests");
   };
 
   return (
