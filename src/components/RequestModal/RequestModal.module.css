@@ -1,17 +1,14 @@
-/* RequestModal.module.css */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
-/* ===== Кольори й змінні ===== */
 :root {
-  --modal-bg: rgba(255, 255, 255, 0.15); /* скло-ефект */
+  --modal-bg: rgba(255, 255, 255, 0.15);
   --modal-border: rgba(255, 255, 255, 0.25);
   --modal-text: #f9fafb;
   --modal-muted: #cbd5e1;
-  --accent-color: #38bdf8; /* Tailwind sky-400 */
-  --hover-accent: #0ea5e9; /* sky-500 */
+  --accent-color: #38bdf8;
+  --hover-accent: #0ea5e9;
 }
 
-/* ===== Анімації ===== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -32,7 +29,6 @@
   }
 }
 
-/* ===== Overlay ===== */
 .overlay {
   position: fixed;
   inset: 0;
@@ -45,7 +41,6 @@
   animation: fadeIn 0.25s ease-out forwards;
 }
 
-/* ===== Modal ===== */
 .modal {
   position: relative;
   width: 90%;
@@ -63,7 +58,6 @@
   animation: scaleIn 0.35s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-/* ===== Кнопка закриття ===== */
 .closeButton {
   position: absolute;
   top: 18px;
@@ -81,7 +75,6 @@
   transform: rotate(90deg) scale(1.15);
 }
 
-/* ===== Зображення ===== */
 .image {
   width: 100%;
   max-height: 280px;
@@ -92,7 +85,6 @@
   border: 1px solid var(--modal-border);
 }
 
-/* ===== Текстові блоки ===== */
 .title {
   font-size: 24px;
   font-weight: 700;
@@ -135,7 +127,6 @@
   border-radius: 4px;
 }
 
-/* ===== Інформаційна сітка ===== */
 .infoGrid {
   display: flex;
   flex-wrap: wrap;
@@ -153,7 +144,6 @@
   color: var(--accent-color);
 }
 
-/* ===== Основна дія ===== */
 .actionButton {
   margin-top: 32px;
   width: 100%;
@@ -183,7 +173,7 @@
   font-size: 16px;
   color: #e2e8f0;
   line-height: 1.5;
-  scrollbar-width: thin; /* Для Firefox */
+  scrollbar-width: thin;
   scrollbar-color: var(--accent-color) transparent;
 }
 
