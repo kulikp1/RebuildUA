@@ -14,7 +14,6 @@ const RequestsPage = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const navigate = useNavigate();
 
-  // Функція для отримання заявок
   const fetchRequests = () => {
     setLoading(true);
     fetch("https://6844cf88fc51878754d9e305.mockapi.io/bid")
@@ -33,7 +32,6 @@ const RequestsPage = () => {
     fetchRequests();
   }, []);
 
-  // Витягуємо тільки міста з location
   const extractCity = (location) => {
     if (!location) return "Невідомо";
     const match = location.match(/м\. ?([А-Яа-яІіЇїЄєҐґ\-]+)/i);
@@ -42,7 +40,6 @@ const RequestsPage = () => {
       : "Невідомо";
   };
 
-  // Отримуємо всі унікальні міста, з однаковим форматом (м. Київ, м. Львів, тощо)
   const cities = Array.from(
     new Set(
       requests
@@ -51,7 +48,6 @@ const RequestsPage = () => {
     )
   );
 
-  // Фільтрація без залежності від регістру
   const filteredRequests = selectedCity
     ? requests.filter(
         (req) =>
