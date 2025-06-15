@@ -190,7 +190,6 @@
   background: transparent;
 }
 
-/* ===== Адаптивність ===== */
 @media (max-width: 640px) {
   .modal {
     padding: 24px 20px 32px;
