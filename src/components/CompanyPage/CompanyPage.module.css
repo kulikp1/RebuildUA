@@ -34,7 +34,7 @@
 
 .actions {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* ТРИ в ряд */
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   align-items: stretch;
   justify-items: center;
