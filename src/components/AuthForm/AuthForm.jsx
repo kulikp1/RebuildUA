@@ -140,7 +140,6 @@ const AuthForm = () => {
 
         if (!response.ok) throw new Error("Registration failed");
 
-        // Зберігаємо email у localStorage
         localStorage.setItem("userEmail", formData.login);
 
         navigate(userType === "citizen" ? "/userPage" : "/companyPage");
